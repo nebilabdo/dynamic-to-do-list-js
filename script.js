@@ -1,45 +1,46 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const addButton = document.getElementById('add-task-btn');
     const taskInput = document.getElementById('task-input');
     const taskList = document.getElementById('task-list');
+    const addButton = document.getElementById('add-task-btn');
 
-    // Add event listener for button click
+    // ✅ Attach event listener to Add Button
     addButton.addEventListener('click', addTask);
 
-    // Add event listener for Enter key press
+    // ✅ Attach keypress event listener for Enter key
     taskInput.addEventListener('keypress', function (event) {
         if (event.key === 'Enter') {
             addTask();
         }
     });
 
+    // ✅ Define addTask function
     function addTask() {
         const taskText = taskInput.value.trim();
 
-        if (taskText === '') {
-            alert('Please enter a task.');
+        if (taskText === "") {
+            alert("Please enter a task.");
             return;
         }
 
-        // ✅ Create <li> element
+        // ✅ Create new li element
         const li = document.createElement('li');
         li.textContent = taskText;
 
-        // ✅ Create remove button
+        // ✅ Create Remove button
         const removeBtn = document.createElement('button');
-        removeBtn.textContent = 'Remove';
-        removeBtn.className = 'remove-btn';
+        removeBtn.textContent = "Remove";
+        removeBtn.className = "remove-btn";
 
-        // ✅ Add onclick to remove the task
+        // ✅ Add onclick to remove task
         removeBtn.onclick = function () {
             taskList.removeChild(li);
         };
 
-        // ✅ Append remove button to li, then li to ul
+        // ✅ Append button to li, and li to ul
         li.appendChild(removeBtn);
         taskList.appendChild(li);
 
-        // ✅ Clear input field
-        taskInput.value = '';
+        // ✅ Clear input
+        taskInput.value = "";
     }
 });
