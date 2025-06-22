@@ -1,4 +1,3 @@
-// Wait until the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', function () {
     const addButton = document.getElementById('add-task-btn');
     const taskInput = document.getElementById('task-input');
@@ -7,11 +6,11 @@ document.addEventListener('DOMContentLoaded', function () {
     // Load tasks from Local Storage
     loadTasks();
 
-    // Event listener for click
-    addButton.addEventListener('click', addTask);
+    // Event listener for button click
+    addButton.addEventListener('click', () => addTask());
 
-    // Event listener for Enter key
-    taskInput.addEventListener('keypress', function (event) {
+    // Event listener for Enter key press
+    taskInput.addEventListener('keypress', (event) => {
         if (event.key === 'Enter') {
             addTask();
         }
@@ -33,19 +32,16 @@ document.addEventListener('DOMContentLoaded', function () {
         const removeBtn = document.createElement('button');
         removeBtn.textContent = 'Remove';
         removeBtn.className = 'remove-btn';
-        removeBtn.onclick = function() {
+        removeBtn.onclick = function () {
             taskList.removeChild(li);
             removeTaskFromStorage(text);
         };
-        li.appendChild(removeBtn);
 
-        // Append to the list
+        li.appendChild(removeBtn);
         taskList.appendChild(li);
 
-        // Clear input only when creating a new task
-        if (taskText === null) {
-            taskInput.value = '';
-        }
+        // ✅ Always clear input
+        taskInput.value = '';
 
         // Save to storage
         if (save) {
